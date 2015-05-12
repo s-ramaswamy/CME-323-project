@@ -1,6 +1,6 @@
 :load ./KSM.scala
 
-val distK = sc.textFile("roadnet.txt")
+val distK = sc.textFile("facebook_combined.txt")
 val distE = distK.map(s => ((s.split("\\s+")(0).toInt,s.split("\\s+")(1).toInt),(1).toInt))
 //val E = Array(((1,4),5), ((3,5),5), ((4,6),6), ((1,2),7), ((2,5),7), ((2,3),8), ((5,6),8), ((2,4),9), ((5,7),9), ((6,7),11), ((4,5),15))
 //val distE = sc.parallelize(E)

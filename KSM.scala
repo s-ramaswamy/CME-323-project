@@ -1,7 +1,7 @@
 import scala.collection.mutable.HashMap
 import scala.collection.mutable.ArrayBuffer
 
-class DisjointSet[Element] {
+class DisjoIntSet[Element] {
   
   private val parent = new HashMap[Element, Element]().withDefaultValue((-1).asInstanceOf[Element])
   private val rank = new HashMap[Element, Int]
@@ -53,12 +53,13 @@ def Kruskal(E : Array[((Int,Int), Int)]): Array[((Int,Int), Int)] = {
 
 //val V = Array(1,2,3,4,5,6)
 //val E = Array(((1,2),3), ((1,3),5), ((2,3),2), ((4,5),3), ((4,6),5), ((5,6),2))
+println("Inside")
 
 val Esorted = E.sortBy(_._2)
 
 var tree = new Array[((Int, Int), Int)](0)
 
-var x = new DisjointSet[Int]
+var x = new DisjoIntSet[Int]
 
 //for(v <- V)
 //	x.add(v)
@@ -87,7 +88,7 @@ for(e <- tree)
 	val v = e._1._2
 	val w = e._2
 
-	//println("{(" + u + ", " + v + "), " + w + "}")
+	//prIntln("{(" + u + ", " + v + "), " + w + "}")
 }
 
 return tree
