@@ -7,14 +7,14 @@ val V = Array(1,2,3,4,5,6,7)
 val Vpart = V.map((_,scala.util.Random.nextInt(3)))
 val V1 = sc.parallelize(Vpart)
 
-def partition(edge: ((Int,Int),Int), v: Array[(Int,Int)], n: Int): Array [((Int,Int),((Int,Int),Int))] = {
+def partition(edge: ((Int,Int),Int), v: org.apache.spark.broadcast.Broadcast[Array[(Int,Int)]], n: Int): Array [((Int,Int),((Int,Int),Int))] = {
 	var A = new Array[((Int,Int),((Int,Int),Int))](1)
-	if(v(edge._1._1 - 1)._2 != v(edge._1._2 - 1)._2){
-		if(v(edge._1._1 - 1)._2 < v(edge._1._2 - 1)._2){
-			A(0) = ((v(edge._1._1 - 1)._2,v(edge._1._2 - 1)._2),edge)
+	if(v.value(edge._1._1 - 1)._2 != v.value(edge._1._2 - 1)._2){
+		if(v.value(edge._1._1 - 1)._2 < v.value(edge._1._2 - 1)._2){
+			A(0) = ((v.value(edge._1._1 - 1)._2,v.value(edge._1._2 - 1)._2),edge)
 		}
 		else{
-			A(0) = ((v(edge._1._2 - 1)._2,v(edge._1._1 - 1)._2),edge)
+			A(0) = ((v.value(edge._1._2 - 1)._2,v.value(edge._1._1 - 1)._2),edge)
 		}
 		return A
 	}
@@ -24,8 +24,8 @@ def partition(edge: ((Int,Int),Int), v: Array[(Int,Int)], n: Int): Array [((Int,
 		var big = 0;
 		var vlist = 1 to n toArray;
 		for(a <- vlist) yield {
-			small = min(v(edge._1._1 - 1)._2,a-1);
-			big = max(v(edge._1._1 - 1)._2,a-1);
+			small = min(v.value(edge._1._1 - 1)._2,a-1);
+			big = max(v.value(edge._1._1 - 1)._2,a-1);
 			((small,big),edge);
 		}
 	}
