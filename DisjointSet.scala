@@ -3,10 +3,10 @@ package util
 import scala.collection.mutable.HashMap
 import scala.collection.mutable.ArrayBuffer
 
-class DisjointSet[Element] {
+class DisjointSet[Element] extends Serializable{
   
-  private val parent = new HashMap[Element, Element]
-  private val rank = new HashMap[Element, Int]
+  val parent = new HashMap[Element, Element]
+  val rank = new HashMap[Element, Int]
   
   /* number of Elements in the Data structure */
   def size = parent.size
@@ -47,3 +47,4 @@ class DisjointSet[Element] {
   /* toString method */
   override def toString: String = parent.toString
 }
+
